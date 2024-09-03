@@ -4,47 +4,53 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        int escolha;
 
-        System.out.println("Escolha uma opção:");
-        System.out.println("1. Calculadora Simples");
-        System.out.println("2. Cálculo do IMC");
-        System.out.println("3. Cálculo do INSS");
-        System.out.println("4. Cálculo do Imposto de Renda");
-        System.out.println("5. Números Pares e Ímpares");
-        System.out.println("6. Fatorial de um Número");
-        System.out.println("7. Tabuada");
+        do {
+            System.out.println("\nEscolha um programa:");
+            System.out.println("1. Calculadora Simples");
+            System.out.println("2. Cálculo do IMC");
+            System.out.println("3. Cálculo do INSS");
+            System.out.println("4. Cálculo do Imposto de Renda");
+            System.out.println("5. Números Pares e Ímpares");
+            System.out.println("6. Fatorial de um Número");
+            System.out.println("7. Tabuada");
+            System.out.println("0. Sair");
+            System.out.print("Digite sua escolha: ");
+            escolha = scanner.nextInt();
 
-        int opcao = scanner.nextInt();
-
-        switch (opcao) {
-            case 1:
-                calculadoraSimples();
-                break;
-            case 2:
-                calcularIMC();
-                break;
-            case 3:
-                calcularINSS();
-                break;
-            case 4:
-                calcularIR();
-                break;
-            case 5:
-                paresImpares();
-                break;
-            case 6:
-                calcularFatorial();
-                break;
-            case 7:
-                tabuada();
-                break;
-            default:
-                System.out.println("Opção inválida.");
-                break;
-        }
+            switch (escolha) {
+                case 1:
+                    calculadoraSimples();
+                    break;
+                case 2:
+                    calcularIMC();
+                    break;
+                case 3:
+                    calcularINSS();
+                    break;
+                case 4:
+                    calcularIR();
+                    break;
+                case 5:
+                    paresImpares();
+                    break;
+                case 6:
+                    calcularFatorial();
+                    break;
+                case 7:
+                    tabuada();
+                    break;
+                case 0:
+                    System.out.println("Saindo...");
+                    break;
+                default:
+                    System.out.println("Opção inválida. Tente novamente.");
+            }
+        } while (escolha != 0);
     }
 
-    // #Calculadora Simples
+    // Calculadora Simples
     private static void calculadoraSimples() {
         Scanner scanner = new Scanner(System.in);
 
@@ -54,18 +60,18 @@ public class Main {
         System.out.print("Digite o segundo número: ");
         int num2 = scanner.nextInt();
 
-        int soma = num1 + num2;
-        int subtracao = num1 - num2;
-        int multiplicacao = num1 * num2;
-        double divisao = num2 != 0 ? (double) num1 / num2 : Double.NaN;
+        System.out.println("Soma: " + (num1 + num2));
+        System.out.println("Subtração: " + (num1 - num2));
+        System.out.println("Multiplicação: " + (num1 * num2));
 
-        System.out.println("Soma: " + soma);
-        System.out.println("Subtração: " + subtracao);
-        System.out.println("Multiplicação: " + multiplicacao);
-        System.out.println("Divisão: " + (Double.isNaN(divisao) ? "Não é possível dividir por zero." : divisao));
+        if (num2 != 0) {
+            System.out.println("Divisão: " + ((double) num1 / num2));
+        } else {
+            System.out.println("Divisão: Não é possível dividir por zero.");
+        }
     }
 
-    // #Cálculo do IMC
+    // Cálculo do IMC
     private static void calcularIMC() {
         Scanner scanner = new Scanner(System.in);
 
@@ -76,30 +82,28 @@ public class Main {
         double altura = scanner.nextDouble();
 
         double imc = peso / (altura * altura);
-        String classificacao;
-
-        if (imc < 18.5) {
-            classificacao = "Abaixo do peso";
-        } else if (imc < 24.9) {
-            classificacao = "Peso normal";
-        } else if (imc < 29.9) {
-            classificacao = "Sobrepeso";
-        } else {
-            classificacao = "Obesidade";
-        }
 
         System.out.println("IMC: " + String.format("%.2f", imc));
-        System.out.println("Classificação: " + classificacao);
+
+        if (imc < 18.5) {
+            System.out.println("Classificação: Abaixo do peso");
+        } else if (imc < 24.9) {
+            System.out.println("Classificação: Peso normal");
+        } else if (imc < 29.9) {
+            System.out.println("Classificação: Sobrepeso");
+        } else {
+            System.out.println("Classificação: Obesidade");
+        }
     }
 
-    // #Cálculo do INSS
+    // Cálculo do INSS
     private static void calcularINSS() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Digite seu salário bruto: ");
         double salarioBruto = scanner.nextDouble();
-        double contribuicao;
 
+        double contribuicao;
         if (salarioBruto <= 1302.00) {
             contribuicao = salarioBruto * 0.075;
         } else if (salarioBruto <= 2571.29) {
@@ -116,14 +120,14 @@ public class Main {
         System.out.println("Salário líquido: R$" + String.format("%.2f", salarioLiquido));
     }
 
-    // #Cálculo do Imposto de Renda
+    // Cálculo do Imposto de Renda
     private static void calcularIR() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Digite seu salário bruto: ");
         double salarioBruto = scanner.nextDouble();
-        double imposto;
 
+        double imposto;
         if (salarioBruto <= 1903.98) {
             imposto = 0;
         } else if (salarioBruto <= 2826.65) {
@@ -139,7 +143,7 @@ public class Main {
         System.out.println("Imposto de Renda: R$" + String.format("%.2f", imposto));
     }
 
-    // #Números Pares e Ímpares
+    // Números Pares e Ímpares
     private static void paresImpares() {
         Scanner scanner = new Scanner(System.in);
 
@@ -149,22 +153,23 @@ public class Main {
         System.out.print("Digite o segundo número: ");
         int num2 = scanner.nextInt();
 
-        System.out.println("Números pares:");
+        System.out.print("Números pares: ");
         for (int i = num1; i <= num2; i++) {
             if (i % 2 == 0) {
                 System.out.print(i + " ");
             }
         }
 
-        System.out.println("\nNúmeros ímpares:");
+        System.out.print("\nNúmeros ímpares: ");
         for (int i = num1; i <= num2; i++) {
             if (i % 2 != 0) {
                 System.out.print(i + " ");
             }
         }
+        System.out.println();
     }
 
-    // #Fatorial de um Número
+    // Fatorial de um Número
     private static void calcularFatorial() {
         Scanner scanner = new Scanner(System.in);
 
@@ -173,14 +178,13 @@ public class Main {
         int fatorial = 1;
 
         while (numero > 0) {
-            fatorial *= numero;
-            numero--;
+            fatorial *= numero--;
         }
 
         System.out.println("Fatorial: " + fatorial);
     }
 
-    // #Tabuada
+    // Tabuada
     private static void tabuada() {
         Scanner scanner = new Scanner(System.in);
 
